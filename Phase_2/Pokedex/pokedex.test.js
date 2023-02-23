@@ -2,15 +2,27 @@ const Pokedex = require('./Pokedex');
 
 
 describe('pokedex', () => {
+  jest.setTimeout(10000);
   it('constructs with two empty arrays', () => {
-    const pokemon = new Pokedex();
-    expect(pokemon).toEqual({"pokedex": [], "pokemon": []});
+    const pokedex = new Pokedex();
+    expect(pokedex).toEqual({"pokedex": [], "pokemon": []});
   });
 
   it('adds a pokemon to the pokedex', async () => {
-    const pokemon = new Pokedex();
-    await pokemon.addPokemon('pikachu');
-    expect(pokemon.pokedex.length).toBe(1);
-    expect(pokemon.pokedex[0].name).toBe('pikachu');
+    const pokedex = new Pokedex();
+    await pokedex.addPokemon('pikachu');
+    expect(pokedex.pokedex.length).toBe(1);
+    expect(pokedex.pokedex[0].name).toBe('pikachu');
+  });
+
+  it('returns the pokedex', async () => {
+    const pokedex = new Pokedex();
+    await pokedex.addPokemon('pikachu');
+    await pokedex.addPokemon('snorlax');
+    expect(pokedex.all()).toEqual(expect.arrayContaining([
+      expect.objectContaining({ name: 'pikachu' }),
+      expect.objectContaining({ name: 'snorlax' }),
+    ]));
   });
 });
+
