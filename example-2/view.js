@@ -12,9 +12,10 @@ class View {
   }
 
   clearParagraphs() {
-    this.mainContainerEl = document.querySelector('#main-container');
-    this.mainContainerEl.remove()
-  }
-}
+    const allParagraphs = document.querySelectorAll('p');
+    allParagraphs.forEach(p => {
+      p.remove();
+  })
+}};
 
 module.exports = View;
